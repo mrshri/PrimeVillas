@@ -27,13 +27,14 @@ namespace PrimeVillasWeb.Controllers
         [HttpPost]
         public IActionResult Create(Villa villaObj)
         {
-            if(!ModelState.IsValid)
+            if(ModelState.IsValid)
             {
                 _context.Villas.Add(villaObj);
                 _context.SaveChanges();
-
+                TempData["success"] = "Villa added successfully";
                 return RedirectToAction("Index");
             }
+            TempData["error"] = "Villa will  not be added";
             return View(villaObj);
         }
 
@@ -60,8 +61,8 @@ namespace PrimeVillasWeb.Controllers
 
                 _context.Villas.Update(villaObj);
                 _context.SaveChanges();
-
-                return RedirectToAction("Index");
+            TempData["success"] = "Villa updated successfully";
+            return RedirectToAction("Index");
             
         }
 
@@ -85,12 +86,14 @@ namespace PrimeVillasWeb.Controllers
 
             if (obj == null)
             {
-                return NotFound();
+                TempData["error"] = "Villa not found";
+                return RedirectToAction("Error", "Home");
+
             }
 
             _context.Villas.Remove(obj);
             _context.SaveChanges();
-
+            TempData["success"] = "Villa deleted successfully";
             return RedirectToAction("Index");
 
         }
