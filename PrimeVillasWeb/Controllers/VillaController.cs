@@ -91,7 +91,7 @@ namespace PrimeVillasWeb.Controllers
             _context.Villas.Remove(obj);
             _context.SaveChanges();
 
-            return RedirectToAction("Error","Home");
+            return RedirectToAction("Index");
 
         }
 
