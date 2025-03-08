@@ -15,6 +15,7 @@ namespace PrimeVillas.Infrastructure.DATA
             
         }
         public DbSet<Villa> Villas { get; set; }
+        public DbSet<VillaNumber> VillaNumbers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -52,6 +53,44 @@ namespace PrimeVillas.Infrastructure.DATA
                   }
 
 
+            );
+            modelBuilder.Entity<VillaNumber>().HasData(
+                new VillaNumber
+                {
+                    Villa_Number = 101,
+                    VillaId = 6,
+                    SpecialDetails = "Pool View"
+                },
+                new VillaNumber
+                {
+                    Villa_Number = 102,
+                    VillaId = 6,
+                    SpecialDetails = "Garden View"
+                },
+                new VillaNumber
+                {
+                    Villa_Number = 201,
+                    VillaId = 2,
+                    SpecialDetails = "Pool View"
+                },
+                new VillaNumber
+                {
+                    Villa_Number = 202,
+                    VillaId = 2,
+                    SpecialDetails = "Garden View"
+                },
+                new VillaNumber
+                {
+                    Villa_Number = 301,
+                    VillaId = 3,
+                    SpecialDetails = "Pool View"
+                },
+                new VillaNumber
+                {
+                    Villa_Number = 302,
+                    VillaId = 3,
+                    SpecialDetails = "Garden View"
+                }
                 );
         }
     }
