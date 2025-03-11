@@ -13,10 +13,12 @@ namespace PrimeVillas.Infrastructure.Repository
     {
         private readonly VillaContext _dbContext;
         public IVillaRepository Villa { get; private set; }
+        public IVillaNumberRepository VillaNumber { get; private set; }
         public UnitOfWork(VillaContext villaContext)
         {
             _dbContext = villaContext;
             Villa = new VillaRepository(_dbContext);
+            VillaNumber = new VillaNumberRepository(_dbContext);
         }
 
         public void Save()

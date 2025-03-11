@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +25,11 @@ namespace PrimeVillas.Infrastructure.Repository
         public void Add(T entity)
         {
             dbSet.Add(entity);
+        }
+
+        public bool Any(Expression<Func<T, bool>> filter)
+        {
+           return dbSet.Any(filter);
         }
 
         public T Get(Expression<Func<T, bool>>? filter, string? includeProperties = null)
