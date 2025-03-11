@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PrimeVillas.Application.Common.Interfaces;
 using PrimeVillas.Domain.Entities;
 using PrimeVillas.Infrastructure.DATA;
 
@@ -7,15 +8,15 @@ namespace PrimeVillasWeb.Controllers
     
     public class VillaController : Controller
     {
-        private readonly VillaContext _context;
-        public VillaController(VillaContext villaContext)
+        private readonly IUnitOfWork _unitOfWork;
+        public VillaController(IUnitOfWork unitOfWork)
         {
-            _context = villaContext;
+            _unitOfWork = unitOfWork;
         }
         public IActionResult Index()
         {
 
-            IEnumerable<Villa> villas = _context.Villas.ToList();
+            IEnumerable<Villa> villas = _unitOfWork.Villa.GetAll();
             return View(villas);
         }
 
@@ -29,8 +30,8 @@ namespace PrimeVillasWeb.Controllers
         {
             if(ModelState.IsValid)
             {
-                _context.Villas.Add(villaObj);
-                _context.SaveChanges();
+                _unitOfWork.Villa.Add(villaObj);
+                _unitOfWork.Save();
                 TempData["success"] = "Villa added successfully";
                 return RedirectToAction("Index");
             }
@@ -40,7 +41,7 @@ namespace PrimeVillasWeb.Controllers
 
         public IActionResult Edit(int villaId)
         {
-            var obj = _context.Villas.FirstOrDefault(u => u.Id == villaId);
+            var obj = _unitOfWork.Villa.Get(u => u.Id == villaId);
 
             if (obj == null)
             {
@@ -59,8 +60,8 @@ namespace PrimeVillasWeb.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-                _context.Villas.Update(villaObj);
-                _context.SaveChanges();
+            _unitOfWork.Villa.Update(villaObj);
+            _unitOfWork.Save();
             TempData["success"] = "Villa updated successfully";
             return RedirectToAction("Index");
             
@@ -68,21 +69,19 @@ namespace PrimeVillasWeb.Controllers
 
         public IActionResult Delete(int villaId)
         {
-            var obj = _context.Villas.FirstOrDefault(u => u.Id == villaId);
+            var obj = _unitOfWork.Villa.Get(u => u.Id == villaId);
 
             if (obj == null)
             {
                 return RedirectToAction("Error", "Home");
             }
-
-
             return View(obj);
         }
 
         [HttpPost]
         public IActionResult Delete(Villa villaObj)
         {
-            var obj = _context.Villas.FirstOrDefault(u => u.Id == villaObj.Id);
+            var obj = _unitOfWork.Villa.Get(u => u.Id == villaObj.Id);
 
             if (obj == null)
             {
@@ -91,8 +90,8 @@ namespace PrimeVillasWeb.Controllers
 
             }
 
-            _context.Villas.Remove(obj);
-            _context.SaveChanges();
+            _unitOfWork.Villa.Remove(obj);
+            _unitOfWork.Save();
             TempData["success"] = "Villa deleted successfully";
             return RedirectToAction("Index");
 

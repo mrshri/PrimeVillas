@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using PrimeVillas.Application.Common.Interfaces;
 using PrimeVillas.Infrastructure.DATA;
+using PrimeVillas.Infrastructure.Repository;
+using PrimeVillas.Infrastructure.Repository.Repository;
 
 
 namespace PrimeVillasWeb
@@ -15,6 +18,8 @@ namespace PrimeVillasWeb
 
             builder.Services.AddDbContext<VillaContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 
             var app = builder.Build();
 
