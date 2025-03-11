@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PrimeVillas.Domain\PrimeVillas.Domain.csproj" />
+    <ProjectReference Include="..\PrimeVillas.Application\PrimeVillas.Application.csproj" />
   </ItemGroup>
 
 </Project>
