@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PrimeVillas.Infrastructure.DATA;
 
@@ -11,9 +12,11 @@ using PrimeVillas.Infrastructure.DATA;
 namespace PrimeVillas.Infrastructure.Migrations
 {
     [DbContext(typeof(VillaContext))]
-    partial class VillaContextModelSnapshot : ModelSnapshot
+    [Migration("20250312090717_addingAmenityTable")]
+    partial class addingAmenityTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

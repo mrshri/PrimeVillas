@@ -16,6 +16,7 @@ namespace PrimeVillas.Infrastructure.DATA
         }
         public DbSet<Villa> Villas { get; set; }
         public DbSet<VillaNumber> VillaNumbers { get; set; }
+        public DbSet<Amenity> Amenities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -91,7 +92,60 @@ namespace PrimeVillas.Infrastructure.DATA
                     VillaId = 3,
                     SpecialDetails = "Garden View"
                 }
-                );
+            );
+
+            modelBuilder.Entity<Amenity>().HasData(
+                
+                new Amenity
+                {
+                    Id = 1,
+                    Name = "Free Wifi",
+                    Description = "Free Wifi is available in all rooms",
+                    VillaId = 2
+                },
+                new Amenity
+                {
+                    Id = 2,
+                    Name = "Free Parking",
+                    Description = "Free Parking is available for all guests",
+                    VillaId = 2
+                },
+                new Amenity
+                {
+                    Id = 3,
+                    Name = "Free Breakfast",
+                    Description = "Free Breakfast is available for all guests",
+                    VillaId = 2
+                },
+                new Amenity
+                {
+                    Id = 4,
+                    Name = "Free Wifi",
+                    Description = "Free Wifi is available in all rooms",
+                    VillaId = 2
+                },
+                new Amenity
+                {
+                    Id = 5,
+                    Name = "Free Parking",
+                    Description = "Free Parking is available for all guests",
+                    VillaId = 2
+                },
+                new Amenity
+                {
+                    Id = 6,
+                    Name = "Free Breakfast",
+                    Description = "Free Breakfast is available for all guests",
+                    VillaId = 2
+                },
+                new Amenity
+                {
+                    Id = 7,
+                    Name = "Free Wifi",
+                    Description = "Free Wifi is available in all rooms",
+                    VillaId = 3
+                }
+            );
         }
     }
 }
