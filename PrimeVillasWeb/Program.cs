@@ -3,6 +3,9 @@ using PrimeVillas.Application.Common.Interfaces;
 using PrimeVillas.Infrastructure.DATA;
 using PrimeVillas.Infrastructure.Repository;
 using PrimeVillas.Infrastructure.Repository.Repository;
+using Microsoft.AspNetCore.Identity;
+using PrimeVillas.Application.Utility;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 
 namespace PrimeVillasWeb
@@ -19,7 +22,20 @@ namespace PrimeVillasWeb
             builder.Services.AddDbContext<VillaContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
+       
+            builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<VillaContext>().AddDefaultTokenProviders();
+            builder.Services.AddRazorPages();
             builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
+            builder.Services.AddScoped<IEmailSender,EmailSender>();
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
+
 
             var app = builder.Build();
 
@@ -35,9 +51,10 @@ namespace PrimeVillasWeb
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
-
+            app.MapRazorPages();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
