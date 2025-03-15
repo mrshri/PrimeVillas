@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PrimeVillas.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PrimeVillas.Infrastructure.DATA
 {
-    public class VillaContext:DbContext
+    public class VillaContext:IdentityDbContext<IdentityUser>
     {
         public VillaContext(DbContextOptions<VillaContext>options):base(options)
         {
@@ -17,9 +19,11 @@ namespace PrimeVillas.Infrastructure.DATA
         public DbSet<Villa> Villas { get; set; }
         public DbSet<VillaNumber> VillaNumbers { get; set; }
         public DbSet<Amenity> Amenities { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Villa>().HasData(
 
                   new Villa

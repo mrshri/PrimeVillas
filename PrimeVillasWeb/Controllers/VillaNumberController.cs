@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PrimeVillas.Application.Common.Interfaces;
+using PrimeVillas.Application.Utility;
 using PrimeVillas.Domain.Entities;
 using PrimeVillas.Infrastructure.DATA;
 using PrimeVillasWeb.ViewModels;
 
 namespace PrimeVillasWeb.Controllers
 {
+    [Authorize(Roles =StaticDetails.AdminEndUser)]
     public class VillaNumberController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
