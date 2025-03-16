@@ -46,7 +46,7 @@ namespace PrimeVillasWeb.Controllers
                 _unitOfWork.Save();
                 TempData["success"] = "Amenity  added successfully";
 
-                return RedirectToAction("index");
+                return RedirectToAction(nameof(Index));
             }
 
             amenityVMObj.VillaList = _unitOfWork.Villa.GetAll().Select(u => new SelectListItem
@@ -90,7 +90,7 @@ namespace PrimeVillasWeb.Controllers
                 _unitOfWork.Save();
                 TempData["success"] = "Amenity Updated successfully";
 
-                return RedirectToAction("index");
+                return RedirectToAction(nameof(Index));
             }
 
             amenityVM.VillaList = _unitOfWork.Villa.GetAll().Select(u => new SelectListItem
@@ -134,7 +134,7 @@ namespace PrimeVillasWeb.Controllers
             _unitOfWork.Amenity.Remove(obj);
             _unitOfWork.Save();
             TempData["success"] = "Amenity removed successfully.";
-            return RedirectToAction("index");
+            return RedirectToAction(nameof(Index));
         }
     }
 }

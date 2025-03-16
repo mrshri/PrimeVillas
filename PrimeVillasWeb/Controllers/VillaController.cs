@@ -98,7 +98,7 @@ namespace PrimeVillasWeb.Controllers
                 _unitOfWork.Villa.Update(villaObj);
                 _unitOfWork.Save();
                 TempData["success"] = "Villa updated successfully";
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
 
             }
             return View();
@@ -134,7 +134,7 @@ namespace PrimeVillasWeb.Controllers
                 _unitOfWork.Villa.Remove(obj);
                 _unitOfWork.Save();
                 TempData["success"] = "Villa deleted successfully";
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
 
             return View();
