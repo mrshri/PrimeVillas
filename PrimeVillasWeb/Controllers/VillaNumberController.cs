@@ -53,7 +53,7 @@ namespace PrimeVillasWeb.Controllers
                 _unitOfWork.Save();
                 TempData["success"] = "Villa Number added successfully";
 
-                return RedirectToAction("index");
+                return RedirectToAction(nameof(Index));
             }
 
             if (roomNumberExists)
@@ -102,7 +102,7 @@ namespace PrimeVillasWeb.Controllers
                 _unitOfWork.Save();
                 TempData["success"] = "Villa Number Updated successfully";
 
-                return RedirectToAction("index");
+                return RedirectToAction(nameof(Index));
             }
 
             villaNumberVM.VillaList = _unitOfWork.Villa.GetAll().Select(u => new SelectListItem
@@ -147,7 +147,7 @@ namespace PrimeVillasWeb.Controllers
             _unitOfWork.VillaNumber.Remove(obj);
             _unitOfWork.Save();
             TempData["success"] = "Villa Number removed successfully.";
-            return RedirectToAction("index");
+            return RedirectToAction(nameof(Index));
         }
     }
 }
